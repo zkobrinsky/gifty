@@ -6,12 +6,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    byebug
+    # byebug
     if @user.save
       session[:user_id] = @user.id
       redirect_to '/welcome'
     else
-      #redirect and raise error for password confirmation
+      # byebug
+      flash[:alert] = @user.errors.full_messages
+      render 'users/new'
     end
   end
 
