@@ -4,4 +4,10 @@ class User < ApplicationRecord
     has_many :sent_gift_cards, class_name: "GiftCard", foreign_key: "sender_id"
     has_many :received_gift_cards, class_name: "GiftCard", foreign_key: "recipient_id"
 
+    def stores
+        giftcards = (self.sent_gift_cards + self.received_gift_cards).uniq
+        stores = giftcards.collect {|s| s.store_id}.compact.uniq
+        Store.find(stores)
+    end
+
 end
