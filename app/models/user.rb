@@ -6,6 +6,7 @@ class User < ApplicationRecord
     validates :username, uniqueness: true
     validates :email, presence: true
     validates :email, uniqueness: true
+    validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
     has_many :sent_gift_cards, class_name: "GiftCard", foreign_key: "sender_id"
     has_many :received_gift_cards, class_name: "GiftCard", foreign_key: "recipient_id"
