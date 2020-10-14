@@ -5,7 +5,7 @@ class User < ApplicationRecord
     scope :admins, -> {where(admin:true)}
 
     has_secure_password
-    validates :password, length: { minimum: 6, maximum: 20 }
+    validates :password, length: { in: 6..20 }
 
     validates :username, presence: true
     validates :username, uniqueness: true
