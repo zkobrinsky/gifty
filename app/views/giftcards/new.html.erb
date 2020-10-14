@@ -1,1 +1,14 @@
 <h1>Send a new gift card</h1>
+
+<%= form_with model:@card, url: user_gift_cards_path(@current_user.id), local: :true do |f|%>
+
+    <%= f.collection_select(:store_id, Store.all, :id, :name, :include_blank => "Select a Store") %><br><br>
+
+    <%= f.label "Amount" %><br>
+    <%= f.number_field :dollar_value, step: 0.01, placeholder: "$" %><br>
+  
+    <%= f.label "Recipient Email or Username"%><br>
+    <%= f.text_field :recipient%><br>
+  
+    <%= f.submit %>
+  <%end%>
