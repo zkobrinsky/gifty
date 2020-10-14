@@ -6,30 +6,23 @@ class GiftCardsController < ApplicationController
     helper_method :valid_received_cards
 
     def index
-        # current_user
-        # byebug
         render 'giftcards/index'
-        # @cards = current_user.gift_cards.select {|g| g.dollar_value}
     end
 
     def show
-        byebug
+        render 'giftcards/show'
     end
 
     def new
-
+        render 'giftcards/new'
     end
 
     def create
-
+        
     end
 
     def sent
         render 'giftcards/sent'
-    end
-
-    def received
-
     end
 
         private
