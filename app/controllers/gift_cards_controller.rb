@@ -27,7 +27,6 @@ class GiftCardsController < ApplicationController
         @card.recipient = User.find_by_username_or_email(params[:gift_card][:recipient], params[:gift_card][:recipient])
         @card.sender = current_user
         generate_code
-        byebug
     end
 
     def sent
