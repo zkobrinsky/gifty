@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
+      log_in
       redirect_to '/welcome'
     else
       flash[:alert] = @user.errors.full_messages
