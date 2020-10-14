@@ -1,6 +1,8 @@
 <h1>Welcome</h1>
 <% if logged_in? %>
     <h1>You are Logged In, <%= current_user.username %></h1>
+    <h2>Link to Send a Gift Card</h2>
+    <h2>Link to View your gift cards</h2>
     <%= button_to "Log Out", '/sessions', method: :delete %>
 <% else %>
     <%= button_to "Login", '/login', method: :get%>
