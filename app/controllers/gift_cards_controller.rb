@@ -6,7 +6,11 @@ class GiftCardsController < ApplicationController
     helper_method :valid_received_cards
 
     def index
-        render 'giftcards/index'
+        if authenticate_user
+            render 'giftcards/index'
+        else
+            # byebug
+        end
     end
 
     def show
@@ -14,11 +18,16 @@ class GiftCardsController < ApplicationController
     end
 
     def new
+        @card = GiftCard.new
         render 'giftcards/new'
     end
 
     def create
-        
+        @card = GiftCard.new(gift_card_params)
+        @card.recipient = User.find_by_username_or_email(params[:gift_card][:recipient], params[:gift_card][:recipient])
+        @card.sender = current_user
+        generate_code
+        byebug
     end
 
     def sent
@@ -26,6 +35,14 @@ class GiftCardsController < ApplicationController
     end
 
         private
+
+        def gift_card_params
+            params.require(:gift_card).permit(:store_id, :dollar_value)
+        end
+
+        def generate_code
+            @card.code = SecureRandom.alphanumeric
+        end
 
         def all_valid_cards
             if current_user
