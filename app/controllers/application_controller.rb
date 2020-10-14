@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
         !!current_user
     end
 
+    def authenticate_user
+        current_user.id == params[:user_id].to_i
+    end
+
     def log_in
         session[:user_id] = @user.id
     end
@@ -20,5 +24,5 @@ class ApplicationController < ActionController::Base
             flash[:alert] << "Please log in to access this page"
             redirect_to login_path
         end
-      end
+    end
 end
