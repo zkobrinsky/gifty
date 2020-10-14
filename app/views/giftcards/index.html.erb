@@ -1,0 +1,8 @@
+<h1>Here are all your gift cards</h1>
+<% @current_user.gift_cards.each do |card| %>
+    <h2><%= link_to "Card # #{card.id}", user_gift_card_path(@current_user.id, card.id)%></h2>
+    <h3><%= card.store.name if card.store %></h3>
+    <p><strong>To: </strong><%= card.recipient.username %></p>
+    <p><strong>From: </strong><%= card.sender.username %></p>
+    <p><strong>Amount Available: </strong>$<%= card.dollar_value.to_f %></p><br>
+<% end %>
