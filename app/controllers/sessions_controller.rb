@@ -3,14 +3,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(username: params[:username])
-    byebug
-    if @user && @user.authenticate(params[:password])
-       log_in
-       redirect_to '/welcome'
+    if @user = User.find_by(username: params[:username])
+      if @user && @user.authenticate(params[:password])
+         log_in
+         redirect_to '/welcome'
+      else
+        # byebug
+        flash[:alert] = []
+        flash[:alert] << "Incorrect Password"
+        redirect_to login_path
+      end
     else
-      @user.valid?
-      flash[:alert] = @user.errors.full_messages
+      flash[:alert] = []
+      flash[:alert] << "Could not find user '#{params[:username]}'."
       redirect_to login_path
     end
  end
