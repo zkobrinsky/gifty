@@ -1,4 +1,5 @@
 class GiftCardsController < ApplicationController
+    before_action :require_login
 
     def index
 
@@ -9,6 +10,14 @@ class GiftCardsController < ApplicationController
     end
 
     def create
+
+    end
+
+    def sent
+
+    end
+
+    def received
 
     end
 
