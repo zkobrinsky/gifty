@@ -19,4 +19,8 @@ class User < ApplicationRecord
         Store.find(stores)
     end
 
+    def gift_cards
+        (self.sent_gift_cards + self.received_gift_cards).uniq
+    end
+
 end
