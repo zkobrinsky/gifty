@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, length: { in: 6..20 }
 
-    validates :username, presence: true
+    # validates :username, presence: true
     validates :username, uniqueness: true
     validates :email, presence: true
     validates :email, uniqueness: true
@@ -23,8 +23,8 @@ class User < ApplicationRecord
         (self.sent_gift_cards + self.received_gift_cards).uniq
     end
 
-    def self.find_by_username_or_email(username, email)
-        self.where('username = ? or email = ?', username, email).first
+    def self.find_by_username_or_email(user_arg)
+        self.where('username = ? or email = ?', user_arg, user_arg).first
     end
 
 end
