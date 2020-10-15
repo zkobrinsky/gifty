@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     helper_method :logged_in?
 
     def current_user
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
+        @user ||= User.find(session[:user_id]) if session[:user_id]
     end
 
     def logged_in?
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user
-        current_user.id == params[:user_id].to_i
+        current_user.id == params[:id].to_i || current_user.id == params[:user_id].to_i
     end
 
     def log_in
