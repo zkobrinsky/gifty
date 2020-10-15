@@ -1,0 +1,7 @@
+<% if current_user.username %>
+    <h1>Hello, <%=current_user.username%></h1>
+<%else%>
+    <h1>Hello, <%=current_user.email%></h1>
+<% end %>
+
+<%=link_to "View your gift cards", user_gift_cards_path(current_user.id) %>
