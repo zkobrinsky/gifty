@@ -6,12 +6,12 @@ class SessionsController < ApplicationController
     if auth
       omniauth_login
       log_in
-      redirect_to '/welcome'
+      redirect_to welcome_path
     else
       if @user = User.find_by_username_or_email(params[:email])
         if @user && @user.authenticate(params[:password])
            log_in
-           redirect_to '/welcome'
+           redirect_to welcome_path
         else
           # byebug
           flash[:alert] = ["Incorrect Password"]
