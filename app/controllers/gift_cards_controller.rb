@@ -7,7 +7,7 @@ class GiftCardsController < ApplicationController
 
     def index
         if authenticate_user
-            render 'giftcards/index'
+            render 'gift_cards/index'
         else
             # byebug
         end
@@ -15,12 +15,12 @@ class GiftCardsController < ApplicationController
 
     def show
         @card = current_user.sent_gift_cards.last
-        render 'giftcards/show'
+        render 'gift_cards/show'
     end
 
     def new
         @card = GiftCard.new
-        render 'giftcards/new'
+        render 'gift_cards/new'
     end
 
 
@@ -30,13 +30,13 @@ class GiftCardsController < ApplicationController
         @card.code = generate_code
         if @card.recipient = User.find_by_email(params[:gift_card][:recipient])
             if @card.save
-                flash[:alert] = ["Card successfully created"]
+                flash[:alert] = ["Card successfully sent"]
                 #need to implement flash message in view
                 redirect_to user_gift_card_path(current_user.id, @card.id)
             else
                 #i don't think this scenario will happen
                 flash[:alert] = ["There was a problem with your request"]
-                render 'giftcards/new'
+                render 'gift_cards/new'
             end
         else
             @card.recipient = User.create(password: generate_code, email: params[:gift_card][:recipient])
@@ -50,13 +50,13 @@ class GiftCardsController < ApplicationController
     end
 
     def sent
-        render 'giftcards/sent'
+        render 'gift_cards/sent'
     end
 
         private
 
         def gift_card_params
-            params.require(:gift_card).permit(:store_id, :dollar_value)
+            params.require(:gift_card).permit(:store_id, :dollar_value, :message)
         end
 
         def generate_code
