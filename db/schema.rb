@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_143942) do
+ActiveRecord::Schema.define(version: 2020_10_15_181336) do
 
   create_table "gift_cards", force: :cascade do |t|
     t.integer "sender_id"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2020_10_13_143942) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "dollar_value", precision: 9, scale: 2
     t.string "code"
-    #will have to make automatic code generator
     t.integer "store_id"
+    t.string "message"
   end
 
   create_table "stores", force: :cascade do |t|
