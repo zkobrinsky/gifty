@@ -14,6 +14,7 @@ class GiftCardsController < ApplicationController
     end
 
     def show
+        @card = current_user.sent_gift_cards.last
         render 'giftcards/show'
     end
 
@@ -27,6 +28,13 @@ class GiftCardsController < ApplicationController
         @card.recipient = User.find_by_username_or_email(params[:gift_card][:recipient], params[:gift_card][:recipient])
         @card.sender = current_user
         generate_code
+
+        if @card.save
+            redirect_to user_gift_card_path(current_user.id, @card.id)
+        else
+            #do an error
+        end
+
     end
 
     def sent
