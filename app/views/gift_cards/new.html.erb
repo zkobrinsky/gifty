@@ -1,6 +1,6 @@
 <h1>Send a new gift card</h1>
 
-<%= form_with model:@card, url: user_gift_cards_path(@current_user.id), local: :true do |f|%>
+<%= form_with model:@card, url: user_gift_cards_path(current_user.id), local: :true do |f|%>
 
     <%= f.collection_select(:store_id, Store.all, :id, :name, {:include_blank => "Select a Store"}, {multiple: false, required: true}) %><br><br>
 
@@ -9,6 +9,9 @@
   
     <%= f.label "Recipient Email"%><br>
     <%= f.text_field :recipient, required: true %><br>
+
+    <%= f.label "Enter a message (optional) "%><br>
+    <%= f.text_area :message, required: false, size: "30x10" %><br>
   
     <%= f.submit %>
   <%end%>
