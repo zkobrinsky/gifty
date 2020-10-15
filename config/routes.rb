@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create] do
     resources :gift_cards, only: [:index, :new, :create, :show]
   end
-  
+  get '/auth/facebook/callback' => 'sessions#create'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'welcome', to: 'sessions#welcome'
