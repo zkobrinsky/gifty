@@ -1,7 +1,8 @@
 <h2>Welcome to Gifty</h2>
-<p>If you received a gift, please enter the details below to create an account</p>
+<p>If you received a gift, please enter the details below to create an account.</p>
+<p><strong>Please note: </strong> Email address must match the address the code was sent to.</p>
 
-<%= form_with(url: '/invite', method: "patch") do |f| %>
+<%= form_with(scope: :user, url: '/invite', method: "patch") do |f| %>
     <%= f.label :code, "Gift Card Code" %><br>
     <%= f.text_field :code, required: true %><br>
 
