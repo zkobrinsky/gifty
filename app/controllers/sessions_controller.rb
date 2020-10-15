@@ -3,29 +3,52 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if @user = User.find_by(username: params[:username])
-      if @user && @user.authenticate(params[:password])
-         log_in
-         redirect_to '/welcome'
+    if auth
+      omniauth_login
+      log_in
+      redirect_to '/welcome'
+    else
+      if @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+           log_in
+           redirect_to '/welcome'
+        else
+          # byebug
+          flash[:alert] = []
+          flash[:alert] << "Incorrect Password"
+          redirect_to login_path
+        end
       else
-        # byebug
         flash[:alert] = []
-        flash[:alert] << "Incorrect Password"
+        flash[:alert] << "Could not find user '#{params[:username]}'."
         redirect_to login_path
       end
-    else
-      flash[:alert] = []
-      flash[:alert] << "Could not find user '#{params[:username]}'."
-      redirect_to login_path
     end
  end
 
   def welcome
-    current_user
   end
 
   def destroy
     session.clear
     redirect_to '/welcome'
   end
+
+    private
+
+      def make_password
+        SecureRandom.alphanumeric
+      end
+
+      def auth
+        request.env['omniauth.auth']
+      end
+
+      def omniauth_login
+        @user = User.find_or_create_by(email: auth['info']['email'])
+        @user.username = auth['info']['name'] if @user.username.blank?
+        @user.password = make_password if @user.password.blank?
+      end
+
+    
 end
