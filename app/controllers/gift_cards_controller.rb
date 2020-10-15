@@ -23,17 +23,29 @@ class GiftCardsController < ApplicationController
         render 'giftcards/new'
     end
 
+
     def create
         @card = GiftCard.new(gift_card_params)
-        @card.recipient = User.find_by_username_or_email(params[:gift_card][:recipient], params[:gift_card][:recipient])
         @card.sender = current_user
-        generate_code
-
-        if @card.save
-            redirect_to user_gift_card_path(current_user.id, @card.id)
+        @card.code = generate_code
+        if @card.recipient = User.find_by_email(params[:gift_card][:recipient])
+            if @card.save
+                flash[:alert] = ["Card successfully created"]
+                #need to implement flash message in view
+                redirect_to user_gift_card_path(current_user.id, @card.id)
+            else
+                #i don't think this scenario will happen
+                flash[:alert] = ["There was a problem with your request"]
+                render 'giftcards/new'
+            end
         else
-            #do an error
-        end
+            @card.recipient = User.create(password: generate_code, email: params[:gift_card][:recipient])
+            @card.sender = current_user
+            @card.code = generate_code
+            @card.save
+            flash[:alert] = ["We couldn't find your friend in our system, so we've invited them to our platform.", "Card successfully created."]
+            redirect_to user_gift_card_path(current_user.id, @card.id)
+        end       
 
     end
 
@@ -48,7 +60,7 @@ class GiftCardsController < ApplicationController
         end
 
         def generate_code
-            @card.code = SecureRandom.alphanumeric
+            SecureRandom.alphanumeric
         end
 
         def all_valid_cards
