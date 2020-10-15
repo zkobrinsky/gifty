@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :gift_cards, only: [:index, :new, :create, :show]
   end
   get '/auth/facebook/callback' => 'sessions#create'
+
+  get '/invite', to: 'users#new_from_gift_card'
+  patch '/invite', to: 'users#create_from_gift_card'
+
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'welcome', to: 'sessions#welcome'
