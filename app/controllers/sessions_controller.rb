@@ -8,19 +8,17 @@ class SessionsController < ApplicationController
       log_in
       redirect_to '/welcome'
     else
-      if @user = User.find_by(username: params[:username])
+      if @user = User.find_by_username_or_email(params[:email])
         if @user && @user.authenticate(params[:password])
            log_in
            redirect_to '/welcome'
         else
           # byebug
-          flash[:alert] = []
-          flash[:alert] << "Incorrect Password"
+          flash[:alert] = ["Incorrect Password"]
           redirect_to login_path
         end
       else
-        flash[:alert] = []
-        flash[:alert] << "Could not find user '#{params[:username]}'."
+        flash[:alert] = ["Could not find user '#{params[:email]}'."]
         redirect_to login_path
       end
     end
