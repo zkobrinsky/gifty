@@ -18,6 +18,10 @@ class GiftCardsController < ApplicationController
         render 'gift_cards/show'
     end
 
+    def public_show
+        @card = GiftCard.find_by_id(params[:id])
+    end
+
     def new
         @card = GiftCard.new
         render 'gift_cards/new'
