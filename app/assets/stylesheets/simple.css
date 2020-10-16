@@ -51,3 +51,9 @@ ul.nav li a {
   color: #b94a48;
 }
 
+a {
+  color: #5c9dff;
+}
+a:hover {
+  color: #a8d6ff
+}
