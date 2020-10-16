@@ -4,7 +4,7 @@ class GiftCardsController < ApplicationController
     helper_method :all_valid_cards
     helper_method :valid_sent_cards
     helper_method :valid_received_cards
-    before_action :authenticate_user
+    before_action :authenticate_user, except: [:public_show]
 
     def index
         render 'gift_cards/index'
