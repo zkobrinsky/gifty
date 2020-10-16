@@ -1,6 +1,6 @@
 <h1>Your sent cards</h1>
 
-<% current_user.sent_gift_cards.reverse.each do |card| %>
+<% valid_sent_cards.reverse.each do |card| %>
     <h2><%= link_to "Card # #{card.id}", user_gift_card_path(current_user.id, card.id)%></h2>
     <h3><%= card.store.name if card.store %></h3>
     <p><strong>To: </strong><%= card.recipient.email %></p>
