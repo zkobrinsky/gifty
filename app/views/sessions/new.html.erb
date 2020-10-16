@@ -1,11 +1,5 @@
 <h1>Login</h1>
 
-<% if flash[:alert] %>
-    <% flash[:alert].each do |message| %>
-        <p><%= message %></p>
-    <% end %>
-<% end %>
-
 <%= form_with url:'/login' do %>
    <%= label_tag :email, "Email or Username" %>
    <%= text_field_tag :email, "", required: true %>
