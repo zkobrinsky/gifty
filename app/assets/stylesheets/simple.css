@@ -51,6 +51,10 @@ ul.nav li a {
   color: #b94a48;
 }
 
+.field_with_errors {
+  display:inline;
+}
+
 a {
   color: #5c9dff;
 }
