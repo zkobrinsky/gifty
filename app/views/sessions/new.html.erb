@@ -2,8 +2,9 @@
 
 <%= form_with url:'/login' do %>
    <%= label_tag :email, "Email or Username" %>
-   <%= text_field_tag :email, "", required: true %>
+   <%= text_field_tag :email, "", required: true %><br><br>
+
    <%= label_tag :password%>
-   <%= password_field_tag :password, "", required: true %>
+   <%= password_field_tag :password, "", required: true %><br><br>
    <%= submit_tag "Login"%>
 <%end%>
