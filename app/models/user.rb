@@ -7,7 +7,6 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, length: { in: 6..20 }
 
-    # validates :username, presence: true
     validates :username, uniqueness: true
     validates :email, presence: true
     validates :email, uniqueness: true
@@ -20,11 +19,15 @@ class User < ApplicationRecord
     end
 
     def gift_cards
-        (self.sent_gift_cards + self.received_gift_cards).uniq
+        GiftCard.where('sender_id = ? or recipient_id = ?', self.id, self.id)
     end
 
     def self.find_by_username_or_email(user_arg)
         self.where('username = ? or email = ?', user_arg, user_arg).first
+    end
+
+    def recent_activity(num_days)
+        gift_cards.where("updated_at > ?", num_days.days.ago.localtime)
     end
 
 end
