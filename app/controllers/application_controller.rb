@@ -11,7 +11,12 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user
-        current_user.id == params[:id].to_i || current_user.id == params[:user_id].to_i
+        if current_user.id == params[:id].to_i || current_user.id == params[:user_id].to_i
+            return
+        else
+            redirect_to welcome_path
+            flash[:alert] = ["Aren't you cheeky trying to edit someone else's account"]
+        end
     end
 
     def log_in
