@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, except: [:new, :create, :new_from_gift_card, :create_from_gift_card]
+
   def new
     @user = User.new
   end
@@ -15,20 +17,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if authenticate_user
-      @user = User.find_by_id(params[:id])
-    else
-      flash[:alert] = ["Aren't you cheeky trying to edit someone else's account"]
-      redirect_to welcome_path
-    end
+    @user = User.find_by_id(params[:id])
   end
 
   def update
     current_user.assign_attributes(user_params)
-    if !authenticate_user
-      flash[:alert] = ["Aren't you cheeky trying to edit someone else's account"]
-      redirect_to welcome_path
-    elsif current_user.save
+    if current_user.save
       redirect_to user_path
     else
       flash[:alert] = current_user.errors.full_messages
@@ -37,10 +31,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    
   end
 
   def new_from_gift_card
+    if logged_in?
+      redirect_to welcome_path
+    end
   end
 
   def create_from_gift_card
