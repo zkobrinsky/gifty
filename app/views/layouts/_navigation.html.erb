@@ -1,4 +1,14 @@
 <ul class="nav">
   <li><%= link_to 'Home', root_path %></li>
+    <%if logged_in? %>
+      <li><%=link_to "View your gift cards", user_gift_cards_path(current_user.id) %></li>
+      <li><%= link_to "Send a Gift Card", new_user_gift_card_path(current_user.id) %></li>
+      <li><%= link_to "Log Out", '/sessions', method: :delete %></li>
+    <% else %>
+      <li><%= link_to "Login", '/login' %></li>
+      <li><%= link_to 'Log in with Facebook', '/auth/facebook' %></li>
+      <li><%= link_to "Sign Up", '/users/new' %></li>
+    <% end %>
+
   <%= render 'layouts/navigation_links' %>
 </ul>
