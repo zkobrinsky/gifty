@@ -5,7 +5,7 @@
     <%= f.collection_select(:store_id, Store.all, :id, :name, {:include_blank => "Select a Store"}, {multiple: false, required: true}) %><br><br>
 
     <%= f.label "Amount" %><br>
-    <%= f.number_field :dollar_value, step: 0.01, placeholder: "$", required: true %><br>
+    <%= f.number_field :dollar_value, step: 0.01, placeholder: "$", required: true, in: 1..99999999.99%><br>
   
     <%= f.label "Recipient Email"%><br>
     <%= f.text_field :recipient, required: true %><br>
