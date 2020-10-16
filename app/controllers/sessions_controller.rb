@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
            log_in
            redirect_to welcome_path
         else
-          # byebug
           flash[:alert] = ["Incorrect Password"]
           redirect_to login_path
         end
