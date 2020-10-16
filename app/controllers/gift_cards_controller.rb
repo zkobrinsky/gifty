@@ -4,13 +4,10 @@ class GiftCardsController < ApplicationController
     helper_method :all_valid_cards
     helper_method :valid_sent_cards
     helper_method :valid_received_cards
+    before_action :authenticate_user
 
     def index
-        if authenticate_user
-            render 'gift_cards/index'
-        else
-            # byebug
-        end
+        render 'gift_cards/index'
     end
 
     def show
@@ -30,12 +27,10 @@ class GiftCardsController < ApplicationController
 
     def create
         @card = GiftCard.new(gift_card_params)
-        @card.sender = current_user
-        @card.code = generate_code
+        @card.assign_attributes(sender: current_user, code: generate_code)
         if @card.recipient = User.find_by_email(params[:gift_card][:recipient])
             if @card.save
-                flash[:alert] = ["Card successfully sent"]
-                #need to implement flash message in view
+                flash[:notice] = ["Card successfully sent"]
                 redirect_to user_gift_card_path(current_user.id, @card.id)
             else
                 #i don't think this scenario will happen
@@ -44,13 +39,10 @@ class GiftCardsController < ApplicationController
             end
         else
             @card.recipient = User.create(password: generate_code, email: params[:gift_card][:recipient])
-            @card.sender = current_user
-            @card.code = generate_code
-            @card.save
-            flash[:alert] = ["We couldn't find your friend in our system, so we've invited them to our platform.", "Card successfully created."]
+            @card.update(sender: current_user, code: generate_code)
+            flash[:notice] = ["We couldn't find your friend in our system, so we've invited them to our platform.", "Card successfully created."]
             redirect_to user_gift_card_path(current_user.id, @card.id)
-        end       
-
+        end
     end
 
     def sent
