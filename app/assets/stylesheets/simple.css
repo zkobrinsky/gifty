@@ -2,9 +2,12 @@
  * Simple CSS stylesheet for a navigation bar and flash messages.
  */
 main {
-  background-color: #eee;
+  background-color: white;
   padding-bottom: 80px;
-  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 80%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 header {
   border: 1px solid #d4d4d4;
