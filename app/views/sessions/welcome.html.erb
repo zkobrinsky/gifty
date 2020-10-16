@@ -1,13 +1,11 @@
-
 <% if logged_in? %>
-<h2>Welcome, <%= current_user.username ? current_user.username : current_user.email %>.</h2>
+<h2>Welcome, <%= username_or_email(current_user) %>.</h2>
 <h3>Your recent activity:</h3>
-
     <% current_user.recent_activity(2).reverse.each do |card| %>
         <% if card.sender_id == current_user.id %>
-            <p>You sent <strong><%=card.recipient.username ? card.recipient.username : card.recipient.email %></strong> a <%=link_to "card", gift_card_path(card.id) %> on <%= card.created_at.localtime.strftime('%b %e,%l:%M %p') %>.</p>
+            <p>You sent <strong><%= username_or_email(card.recipient) %></strong> a <%=link_to "card", gift_card_path(card.id) %> on <%= show_time(card) %>.</p>
         <% else %>
-            <p><strong><%= card.recipient.username ? card.recipient.username : card.recipient.email %></strong> sent you a <%=link_to "card", user_gift_card_path(current_user.id, card.id) %> on <%= card.created_at.localtime.strftime('%b %e,%l:%M %p') %>.</p>
+            <p><strong><%= username_or_email(card.sender) %></strong> sent you a <%=link_to "card", user_gift_card_path(current_user.id, card.id) %> on <%= show_time(card) %>.</p>
         <% end %>
     <% end %>
 <% else %>
