@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, length: { in: 6..20 }
 
-    validates :username, uniqueness: true
+    validates :username, uniqueness: true, allow_nil: true
     validates :email, presence: true
     validates :email, uniqueness: true
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
