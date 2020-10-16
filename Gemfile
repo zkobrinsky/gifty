@@ -26,6 +26,8 @@ gem 'dotenv-rails'
 # third-party authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
+# simple css styling gem
+gem 'rails_layout'
 
 
 # Use Active Storage variant
