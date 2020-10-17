@@ -11,7 +11,7 @@ class GiftCardsController < ApplicationController
     end
 
     def show
-        @card = current_user.sent_gift_cards.last
+        @card = current_user.gift_cards.last
         render 'gift_cards/show'
     end
 
