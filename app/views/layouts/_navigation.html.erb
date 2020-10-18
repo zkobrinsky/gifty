@@ -3,6 +3,7 @@
     <%if logged_in? %>
       <li><%=link_to "View your gift cards", user_gift_cards_path(current_user.id) %></li>
       <li><%= link_to "Send a Gift Card", new_user_gift_card_path(current_user.id) %></li>
+      <li><%= link_to "Edit Account", edit_user_path(current_user.id) %></li>
       <li><%= link_to "Log Out", '/sessions', method: :delete %></li>
     <% else %>
       <li><%= link_to "Login", '/login' %></li>
