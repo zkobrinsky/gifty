@@ -1,24 +1,30 @@
-# README
+# Gifty
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Gifty is a web application for sending and receiving digital gift cards. Users can apply their gift cards upon checkout at various venders' websites.
 
-Things you may want to cover:
+## Requirements
+This application is built on Rails 6.0.3.4.
 
-* Ruby version
+## Installation
 
-* System dependencies
+Use the bundle install gem to make sure all dependencies in the gem fall are available to the application.
+Run rails db:migrate. Launch the application on your local server.
 
-* Configuration
+```bash
+bundle install
+rails db:migrate
+```
 
-* Database creation
+## Usage
 
-* Database initialization
+```ruby
+rails s
+```
 
-* How to run the test suite
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-* Services (job queues, cache servers, search engines, etc.)
+Please make sure to update tests as appropriate.
 
-* Deployment instructions
-
-* ...
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
