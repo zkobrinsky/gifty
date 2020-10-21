@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   end
 
   def new_from_gift_card
+    @user = User.new
     if logged_in?
       redirect_to welcome_path
     end
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
           redirect_to welcome_path
         else
           flash[:alert] = @user.errors.full_messages
-          redirect_to invite_path
+          render invite_path
         end
       else
         flash[:alert] = ["The email you entered does not match the email associated with the Gift Card code."]
