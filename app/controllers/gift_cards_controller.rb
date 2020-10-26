@@ -32,7 +32,6 @@ class GiftCardsController < ApplicationController
                 flash[:notice] = ["Card successfully sent"]
                 redirect_to user_gift_card_path(current_user.id, @card.id)
             else
-                #i don't think this scenario will happen
                 flash[:alert] = ["There was a problem with your request"]
                 render 'gift_cards/new'
             end
