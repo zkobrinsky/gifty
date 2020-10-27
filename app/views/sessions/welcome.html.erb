@@ -1,5 +1,6 @@
 <% if logged_in? %>
 <h2>Welcome, <%= username_or_email(current_user) %>.</h2>
+
 <h3>Your recent activity:</h3>
     <% if current_user.recent_activity(5).present? %>
         <% current_user.recent_activity(5).reverse.each do |card| %>
