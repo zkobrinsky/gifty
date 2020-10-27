@@ -1,3 +1,5 @@
 <h2>Card # <%=@card.id%></h2>
     <%= render partial: "display" %>
-    <p><strong>Checkout Code: </strong><%= @card.code %></p>
+    <% if current_user.id == @card.recipient.id %>
+        <p><strong>Checkout Code: </strong><%= @card.code %></p>
+    <% end %>
