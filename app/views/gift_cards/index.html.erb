@@ -11,7 +11,7 @@
         <% else %>
             <p><strong>From: </strong><%= card.sender.email %></p>
         <% end %>
-        <p><strong>Amount Available: </strong><%= card.dollar_value.to_f %></p>
+        <p><strong>Amount Available: </strong><%= number_to_currency(card.dollar_value) %></p>
         <% if card.message %>
             <p><strong>Message: </strong><%= card.message %></p>
         <% end %>

@@ -4,7 +4,7 @@
     <h2><%= link_to "Card # #{card.id}", user_gift_card_path(current_user.id, card.id)%></h2>
     <h3><%= card.store.name if card.store %></h3>
     <p><strong>To: </strong><%= card.recipient.email %></p>
-    <p><strong>Amount: </strong><%= card.dollar_value %></p>
+    <p><strong>Amount: </strong><%= number_to_currency(card.dollar_value) %></p>
     <% if card.message %>
         <p><strong>Message: </strong><%= card.message %></p>
     <% end %>
