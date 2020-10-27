@@ -27,4 +27,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+This app is the property of Send It and its creators: Sean Fitzgerald, Christopher Cosby, Francesco Salerno and Daniel Roeser.
