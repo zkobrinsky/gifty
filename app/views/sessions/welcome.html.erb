@@ -1,14 +1,18 @@
 <% if logged_in? %>
 <h2>Welcome, <%= username_or_email(current_user) %>.</h2>
 <h3>Your recent activity:</h3>
-    <% current_user.recent_activity(5).reverse.each do |card| %>
-        <% if card.sender_id == current_user.id %>
-            <p>You sent <strong><%= username_or_email(card.recipient) %></strong> a <%=link_to "card", user_gift_card_path(current_user.id, card.id) %> on <%= show_time(card) %>.</p>
-        <% else %>
-            <p><strong><%= username_or_email(card.sender) %></strong> sent you a <%=link_to "card", user_gift_card_path(current_user.id, card.id) %> on <%= show_time(card) %>.</p>
+    <% if current_user.recent_activity(5).present? %>
+        <% current_user.recent_activity(5).reverse.each do |card| %>
+            <% if card.sender_id == current_user.id %>
+                <p>You sent <strong><%= username_or_email(card.recipient) %></strong> a <%=link_to "card", user_gift_card_path(current_user.id, card.id) %> on <%= show_time(card) %>.</p>
+            <% else %>
+                <p><strong><%= username_or_email(card.sender) %></strong> sent you a <%=link_to "card", user_gift_card_path(current_user.id, card.id) %> on <%= show_time(card) %>.</p>
+            <% end %>
         <% end %>
+    <% else %>
+        <p> Nothing to see here. <%= link_to "Send a gift Card!", new_user_gift_card_path(current_user.id) %> </p>
     <% end %>
 <% else %>
-<h2>Hello, Stranger.</h2> 
-<h4>Please log in or sign up to get your gifting on.</h4>
+    <h2>Hello, Stranger.</h2> 
+    <h4>Please log in or sign up to get your gifting on.</h4>
 <% end %>
