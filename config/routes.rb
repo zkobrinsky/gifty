@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :gift_cards, only: [:index, :new, :create, :show]
   end
-
+  
+  # omniauth callback
   get '/auth/facebook/callback' => 'sessions#create'
 
   get '/invite', to: 'users#new_from_gift_card'
