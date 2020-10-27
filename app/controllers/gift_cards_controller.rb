@@ -59,7 +59,7 @@ class GiftCardsController < ApplicationController
 
         def all_valid_cards
             if current_user
-                current_user.sent_gift_cards.select {|g| g.dollar_value && g.store != nil}.sort_by {|card| card[:updated_at]}.reverse
+                current_user.gift_cards.select {|g| g.dollar_value && g.store != nil}.sort_by {|card| card[:updated_at]}.reverse
             end
         end
 
@@ -71,7 +71,7 @@ class GiftCardsController < ApplicationController
 
         def valid_received_cards
             if current_user
-                current_user.sent_gift_cards.select {|g| g.dollar_value && g.store != nil}.sort_by {|card| card[:updated_at]}.reverse
+                current_user.received_gift_cards.select {|g| g.dollar_value && g.store != nil}.sort_by {|card| card[:updated_at]}.reverse
             end
         end
 
