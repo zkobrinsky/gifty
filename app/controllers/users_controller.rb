@@ -36,6 +36,7 @@ class UsersController < ApplicationController
   def new_from_gift_card
     @user = User.new
     if logged_in?
+      flash[:alert] = ["You must be logged out to create a new user from an invitation"]
       redirect_to welcome_path
     end
   end
