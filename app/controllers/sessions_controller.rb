@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
       def omniauth_login
         @user = User.find_or_create_by(email: auth['info']['email'])
         @user.username = auth['info']['name'] if @user.username.blank?
-        @user.password = make_password if @user.password.blank?
+        @user.password = make_password if !@user.password_digest
       end
 
     
